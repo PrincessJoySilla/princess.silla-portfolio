@@ -256,6 +256,7 @@ header {
 }
 
 .section-description {
+    white-space: nowrap;
     margin-bottom: 15px;
 }
 
