@@ -2,6 +2,7 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
 }
+
 /* ==============================
    1. GLOBAL STYLES
 ================================ */
@@ -19,7 +20,6 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 body {
@@ -45,10 +45,15 @@ a {
 header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(13, 17, 23, 0.9);
+    z-index: 1000;
+    background: rgba(13, 17, 23, 0.95);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-color);
+}
+
+body.light-mode header {
+    background: rgba(245, 247, 251, 0.95);
 }
 
 .navbar {
@@ -80,11 +85,9 @@ header {
 .nav-links a {
     position: relative;
     color: var(--secondary-color);
-    text-decoration: none;
     transition: color 0.3s ease;
 }
 
-/* Underline effect */
 .nav-links a::after {
     content: "";
     position: absolute;
@@ -104,7 +107,6 @@ header {
     width: 100%;
 }
 
-/* ACTIVE NAVBAR LINK */
 .nav-links a.active {
     color: var(--accent-color);
 }
@@ -202,7 +204,7 @@ header {
     color: var(--accent-color);
 }
 
-/* HERO PROFILE IMAGE - DESKTOP */
+/* HERO PROFILE IMAGE */
 
 .hero-image {
     flex: 0 0 320px;
@@ -256,8 +258,9 @@ header {
 }
 
 .section-description {
-    white-space: nowrap;
-    margin-bottom: 15px;
+    color: var(--secondary-color);
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 /* ==============================
@@ -482,22 +485,6 @@ header {
     font-size: 13px;
     font-weight: 600;
     margin-top: 12px;
-}
-
-/* MOBILE RESPONSIVENESS */
-
-@media (max-width: 768px) {
-    .education-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .graduation-photo {
-        max-width: 280px;
-    }
-
-    .graduation-photo img {
-        height: 350px;
-    }
 }
 
 /* ==============================
@@ -745,7 +732,7 @@ body.light-mode {
 }
 
 body.light-mode header {
-    background: rgba(245, 247, 251, 0.9);
+    background: rgba(245, 247, 251, 0.95);
 }
 
 body.light-mode .btn-primary {
@@ -768,95 +755,8 @@ body.light-mode .btn-primary {
 }
 
 /* ==============================
-   14. RESPONSIVE DESIGN
+   14. HOBBIES SECTION
 ================================ */
-
-@media (max-width: 768px) {
-
-    .nav-links {
-        gap: 12px;
-        font-size: 13px;
-    }
-
-    .hero {
-        flex-direction: column-reverse;
-        text-align: center;
-        padding-top: 50px;
-    }
-
-    .hero-image {
-        flex: none;
-        width: 240px;
-        height: 280px;
-        max-width: 85%;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .project-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .skills-container {
-        grid-template-columns: 1fr;
-    }
-
-    .certification-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-container {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "email"
-            "linkedin"
-            "github"
-            "facebook"
-            "instagram";
-    }
-
-    .contact-link {
-        min-height: 100px;
-    }
-
-    .resume-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .resume-button {
-        width: 100%;
-        text-align: center;
-    }
-
-    .section {
-        padding: 65px 25px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .navbar {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .nav-links {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-}
-
-/* HOBBIES SECTION */
-.section-description {
-    color: var(--secondary-color);
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
 
 .hobbies-grid {
     display: grid;
@@ -887,8 +787,242 @@ body.light-mode .btn-primary {
     line-height: 1.7;
 }
 
+/* ==============================
+   15. RESPONSIVE DESIGN
+================================ */
+
 @media (max-width: 768px) {
+
+    /* MOBILE NAVBAR */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999;
+    }
+
+    body {
+        padding-top: 108px;
+    }
+
+    html {
+        scroll-padding-top: 120px;
+    }
+
+    .navbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "logo theme"
+            "links links";
+        align-items: center;
+        gap: 8px 12px;
+        width: 100%;
+        padding: 10px 16px 7px;
+    }
+
+    .logo {
+        grid-area: logo;
+        font-size: 25px;
+        line-height: 1.2;
+    }
+
+    #theme-toggle {
+        grid-area: theme;
+        justify-self: end;
+    }
+
+    .nav-links {
+        grid-area: links;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 20px;
+        width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 3px 2px 8px;
+        font-size: 13px;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links li {
+        flex: 0 0 auto;
+    }
+
+    .nav-links a {
+        display: block;
+        white-space: nowrap;
+        padding: 2px 0;
+    }
+
+    .nav-links a::after {
+        bottom: -4px;
+    }
+
+    .section-description {
+        white-space: normal;
+    }
+
+    /* HERO */
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        min-height: auto;
+        padding: 55px 20px 65px;
+        gap: 30px;
+    }
+
+    .hero-image {
+        flex: none;
+        width: 240px;
+        height: 280px;
+        max-width: 85%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    /* GENERAL SECTIONS */
+    .section {
+        padding: 60px 20px;
+    }
+
+    .section h2 {
+        font-size: clamp(28px, 7vw, 36px);
+    }
+
+    /* PROJECTS */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        padding: 24px;
+    }
+
+    /* SKILLS */
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-category {
+        padding: 22px;
+    }
+
+    /* EDUCATION */
+    .education-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .graduation-photo {
+        max-width: 280px;
+    }
+
+    .graduation-photo img {
+        height: 350px;
+    }
+
+    /* CERTIFICATIONS */
+    .certification-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certification-card {
+        padding: 22px;
+    }
+
+    /* CONTACT */
+    .contact-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "email"
+            "linkedin"
+            "github"
+            "facebook"
+            "instagram";
+    }
+
+    .contact-link {
+        min-height: 100px;
+    }
+
+    .resume-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .resume-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* HOBBIES */
     .hobbies-grid {
         grid-template-columns: 1fr;
+    }
+
+    .hobby-card,
+    .timeline-card {
+        padding: 22px;
+    }
+}
+
+/* SMALLER PHONES */
+@media (max-width: 480px) {
+
+    body {
+        padding-top: 104px;
+    }
+
+    html {
+        scroll-padding-top: 116px;
+    }
+
+    .navbar {
+        gap: 7px 10px;
+        padding: 9px 14px 6px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .nav-links {
+        gap: 18px;
+        font-size: 12px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero h2 {
+        font-size: 17px;
+    }
+
+    .section {
+        padding: 55px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html,
+    * {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }
